@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { NgForm } from "@angular/forms";
+import { AuthProvider } from "../../providers/auth/auth";
 
 /**
  * Generated class for the SignOutPage page.
@@ -10,16 +12,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-sign-out',
-  templateUrl: 'sign-out.html',
+  selector: "page-sign-out",
+  templateUrl: "sign-out.html"
 })
 export class SignOutPage {
+  constructor(public navCtrl: NavController, private auth: AuthProvider) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  confirmLogout() {
+    this.auth.logout();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignOutPage');
+  denyLogout() {
+    this.navCtrl.parent.select(0); //navega para pagina 0 root
   }
-
 }

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { NgForm } from "@angular/forms";
+import { AuthProvider } from "../../providers/auth/auth";
 
 /**
  * Generated class for the SignInPage page.
@@ -10,16 +12,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-sign-in',
-  templateUrl: 'sign-in.html',
+  selector: "page-sign-in",
+  templateUrl: "sign-in.html"
 })
 export class SignInPage {
+  constructor(private auth: AuthProvider, private navCtrl: NavController) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  onLogin(form: NgForm) {
+    this.auth.login(form.value.email, form.value.password);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInPage');
+  goToSignUpPage() {
+    this.navCtrl.push("SignUpPage");
   }
-
 }
